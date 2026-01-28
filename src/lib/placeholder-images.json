@@ -1,3 +1,40 @@
 {
-  "placeholderImages": []
+  "placeholderImages": [
+    {
+      "id": "1",
+      "description": "Lancia Delta Integrale rally car in action.",
+      "imageUrl": "https://images.unsplash.com/photo-1709432450896-e18bdd763533?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8bGFuY2lhJTIwcmFsbHl8ZW58MHx8fHwxNzY5NjI4NzkwfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "lancia rally"
+    },
+    {
+      "id": "2",
+      "description": "Audi Quattro S1 on a dirt road.",
+      "imageUrl": "https://images.unsplash.com/photo-1633967220819-f6228a4e7eb6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxhdWRpJTIwcXVhdHRyb3xlbnwwfHx8fDE3Njk2Mjg3OTB8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "audi quattro"
+    },
+    {
+      "id": "3",
+      "description": "Peugeot 205 T16 in a race.",
+      "imageUrl": "https://images.unsplash.com/photo-1757193918056-63fdbe1772b7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxwZXVnZW90JTIwcmFsbHl8ZW58MHx8fHwxNzY5NjI4NzkwfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "peugeot rally"
+    },
+    {
+      "id": "4",
+      "description": "Lancia Stratos with its iconic wedge design.",
+      "imageUrl": "https://images.unsplash.com/photo-1722185128411-456d36207767?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxsYW5jaWElMjBzdHJhdG9zfGVufDB8fHx8MTc2OTYyODc5MHww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "lancia stratos"
+    },
+    {
+      "id": "5",
+      "description": "Ford RS200 Group B car.",
+      "imageUrl": "https://images.unsplash.com/photo-1638964559591-d2c8d8903f77?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw2fHxmb3JkJTIwcmFsbHl8ZW58MHx8fHwxNzY5NjI4NzkwfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "ford rally"
+    },
+    {
+      "id": "6",
+      "description": "Renault 5 Turbo in a corner.",
+      "imageUrl": "https://images.unsplash.com/photo-1728061857346-d9cace15056f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxyZW5hdWx0JTIwcmFsbHl8ZW58MHx8fHwxNzY5NjI4NzkwfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "renault rally"
+    }
+  ]
 }
