@@ -115,4 +115,13 @@ export const products: Product[] = [
     imageHint: 'nissan gtr',
     category: 'GT3',
   },
+  {
+    id: 13,
+    name: 'Nissan Silvia S13 Rocket Bunny',
+    description: 'JDM ikono bat, Rocket Bunny kit oldarkor batekin pertsonalizatua. Drift eta tuning munduan oso ezaguna.',
+    price: 45000,
+    imageUrl: getImage(13),
+    imageHint: 'nissan s13',
+    category: 'Tuning',
+  },
 ];
