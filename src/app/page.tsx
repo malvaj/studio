@@ -6,7 +6,7 @@ import Link from 'next/link';
 
 export default function Home() {
   const heroImage =
-    'https://picsum.photos/seed/rally-hero/2070/1380';
+    'https://picsum.photos/seed/rally-hero/1280/720';
 
   return (
     <div className="space-y-12">
@@ -17,7 +17,7 @@ export default function Home() {
           fill
           className="object-cover"
           priority
-          data-ai-hint="rally car"
+          data-ai-hint="classic rally"
         />
         <div className="absolute inset-0 bg-black/50" />
         <div className="relative z-10 flex h-full flex-col items-center justify-center text-center text-white">
