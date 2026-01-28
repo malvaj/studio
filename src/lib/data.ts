@@ -88,4 +88,13 @@ export const products: Product[] = [
     imageHint: 'toyota celica',
     category: 'A Taldea',
   },
+  {
+    id: 10,
+    name: 'Toyota Tacoma TRD Pro',
+    description: 'Basamortuko lasterketetarako prestatutako piztia. Bere esekidura eta erresistentziak edozein erronkari aurre egiteko gai bihurtzen dute.',
+    price: 120000,
+    imageUrl: getImage(10),
+    imageHint: 'toyota tacoma',
+    category: 'Rally Raid',
+  },
 ];
