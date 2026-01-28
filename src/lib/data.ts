@@ -18,11 +18,11 @@ export const products: Product[] = [
   },
   {
     id: 2,
-    name: 'Audi Quattro S1',
-    description: 'Lau gurpileko trakzioa rallyetan sartu zuen iraultzailea. Bere soinu bereizgarriak eta potentziak kondaira bihurtu zuten.',
-    price: 250000,
+    name: 'Audi Sport Quattro S1 Pikes Peak',
+    description: 'Pikes Peak mendatea konkistatu zuen auto mitikoa, Walter Röhrl-en eskutik. B taldeko ikono bat.',
+    price: 550000,
     imageUrl: getImage(2),
-    imageHint: 'audi quattro',
+    imageHint: 'audi quattro pikes peak',
     category: 'B Taldea',
   },
   {
