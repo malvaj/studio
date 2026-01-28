@@ -97,4 +97,13 @@ export const products: Product[] = [
     imageHint: 'toyota tacoma',
     category: 'Rally Raid',
   },
+  {
+    id: 11,
+    name: 'Peugeot 208 Rally4',
+    description: 'Rally auto moderno eta arina, lehiaketarako diseinatua. Gaur egungo teknologiarekin, eraginkortasun eta segurtasun handia eskaintzen du.',
+    price: 80000,
+    imageUrl: getImage(11),
+    imageHint: 'peugeot 208 rally',
+    category: 'Rally4',
+  },
 ];
