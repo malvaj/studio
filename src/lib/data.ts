@@ -106,4 +106,13 @@ export const products: Product[] = [
     imageHint: 'peugeot 208 rally',
     category: 'Rally4',
   },
+  {
+    id: 12,
+    name: 'Nissan GT-R Nismo GT3',
+    description: 'Zirkuituetarako diseinatutako piztia japoniarra. Bere aerodinamikak eta potentziak GT3 lehiaketetan arrakasta lortzeko aukera eman diote.',
+    price: 450000,
+    imageUrl: getImage(12),
+    imageHint: 'nissan gtr',
+    category: 'GT3',
+  },
 ];
