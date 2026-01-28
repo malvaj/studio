@@ -6,7 +6,7 @@ import Link from 'next/link';
 
 export default function Home() {
   const heroImage =
-    'https://images.unsplash.com/photo-1614026480421-a339a43b3556?q=80&w=2070&auto=format&fit=crop';
+    'https://picsum.photos/seed/rally-hero/2070/1380';
 
   return (
     <div className="space-y-12">
