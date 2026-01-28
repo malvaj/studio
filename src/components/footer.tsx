@@ -15,10 +15,10 @@ export default function Footer() {
           <div>
             <h4 className="font-semibold text-foreground">Laguntza</h4>
             <ul className="mt-4 space-y-2 text-sm">
-              <li><Link href="#" className="text-muted-foreground hover:text-foreground">Galdera ohikoenak</Link></li>
-              <li><Link href="#" className="text-muted-foreground hover:text-foreground">Bidalketa politikak</Link></li>
-              <li><Link href="#" className="text-muted-foreground hover:text-foreground">Itzulketa politika</Link></li>
-              <li><Link href="#" className="text-muted-foreground hover:text-foreground">Pribatutasun politika</Link></li>
+              <li><Link href="/faq" className="text-muted-foreground hover:text-foreground">Galdera ohikoenak</Link></li>
+              <li><Link href="/shipping-policy" className="text-muted-foreground hover:text-foreground">Bidalketa politikak</Link></li>
+              <li><Link href="/return-policy" className="text-muted-foreground hover:text-foreground">Itzulketa politika</Link></li>
+              <li><Link href="/privacy-policy" className="text-muted-foreground hover:text-foreground">Pribatutasun politika</Link></li>
             </ul>
           </div>
           <div>
