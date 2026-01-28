@@ -1,19 +1,29 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/context/auth-context';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Separator } from '@/components/ui/separator';
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
+import type { Order } from '@/lib/types';
 
 export default function AccountPage() {
   const { user, loading } = useAuth();
   const router = useRouter();
+  const [orders, setOrders] = useState<Order[]>([]);
 
   useEffect(() => {
     if (!loading && !user) {
       router.push('/login');
+    } else if (user) {
+      try {
+        const allOrders: Record<string, Order[]> = JSON.parse(localStorage.getItem('rally-orders') || '{}');
+        setOrders(allOrders[user.uid] || []);
+      } catch (error) {
+        console.error("Failed to load orders from localStorage", error);
+        setOrders([]);
+      }
     }
   }, [user, loading, router]);
   
@@ -69,9 +79,38 @@ export default function AccountPage() {
                     <CardTitle>Eskaeren historia</CardTitle>
                 </CardHeader>
                 <CardContent>
-                    <div className="text-center text-muted-foreground">
-                        <p>Oraindik ez duzu eskaerarik egin.</p>
-                    </div>
+                    {orders.length === 0 ? (
+                        <div className="text-center text-muted-foreground">
+                            <p>Oraindik ez duzu eskaerarik egin.</p>
+                        </div>
+                    ) : (
+                        <Accordion type="single" collapsible className="w-full">
+                            {orders.map((order) => (
+                              <AccordionItem value={order.id} key={order.id}>
+                                <AccordionTrigger>
+                                  <div className="flex w-full items-center justify-between pr-4 text-sm">
+                                    <span className="font-medium">#{order.id.slice(-6)}</span>
+                                    <span className="text-muted-foreground">{new Date(order.date).toLocaleDateString('eu-ES')}</span>
+                                    <span className="font-semibold">{new Intl.NumberFormat('eu-ES', { style: 'currency', currency: 'EUR' }).format(order.total)}</span>
+                                  </div>
+                                </AccordionTrigger>
+                                <AccordionContent>
+                                  <ul className="space-y-3 pt-2">
+                                    {order.items.map(item => (
+                                        <li key={item.id} className="flex items-center justify-between text-sm">
+                                            <div>
+                                              <span className="font-medium">{item.name}</span>
+                                              <span className="text-muted-foreground"> (x{item.quantity})</span>
+                                            </div>
+                                            <span>{new Intl.NumberFormat('eu-ES', { style: 'currency', currency: 'EUR' }).format(item.price * item.quantity)}</span>
+                                        </li>
+                                    ))}
+                                  </ul>
+                                </AccordionContent>
+                              </AccordionItem>
+                            ))}
+                        </Accordion>
+                    )}
                 </CardContent>
             </Card>
         </div>

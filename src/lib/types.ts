@@ -18,3 +18,11 @@ export interface User {
   firstName: string;
   lastName: string;
 }
+
+export interface Order {
+  id: string;
+  userId: string;
+  items: CartItem[];
+  total: number;
+  date: string;
+}

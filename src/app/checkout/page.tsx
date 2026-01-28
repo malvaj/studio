@@ -10,6 +10,7 @@ import { useToast } from '@/hooks/use-toast';
 import { Separator } from '@/components/ui/separator';
 import { useAuth } from '@/context/auth-context';
 import { useEffect } from 'react';
+import type { Order } from '@/lib/types';
 
 export default function CheckoutPage() {
   const { state, dispatch } = useCart();
@@ -40,10 +41,43 @@ export default function CheckoutPage() {
   
   const handleCheckout = (e: React.FormEvent) => {
     e.preventDefault();
+    if (!user) {
+        toast({
+            variant: "destructive",
+            title: "Errorea",
+            description: "Saioa hasi behar duzu eskaera egiteko."
+        });
+        return;
+    }
+    
     toast({
         title: "Ordainketa prozesatzen...",
         description: "Zure eskaera prestatzen ari gara."
     });
+
+    const newOrder: Order = {
+        id: new Date().getTime().toString(),
+        userId: user.uid,
+        items: state.items,
+        total: subtotal,
+        date: new Date().toISOString(),
+    };
+
+    try {
+        const storedOrders: Record<string, Order[]> = JSON.parse(localStorage.getItem('rally-orders') || '{}');
+        const userOrders = storedOrders[user.uid] || [];
+        userOrders.unshift(newOrder); // Add to the beginning to show newest first
+        storedOrders[user.uid] = userOrders;
+        localStorage.setItem('rally-orders', JSON.stringify(storedOrders));
+    } catch (error) {
+        console.error("Failed to save order to localStorage", error);
+        toast({
+            variant: "destructive",
+            title: "Errorea eskaera gordetzean",
+            description: "Ezin izan da zure eskaera gorde. Saiatu berriro.",
+        });
+        return;
+    }
 
     setTimeout(() => {
         dispatch({ type: 'CLEAR_CART' });
