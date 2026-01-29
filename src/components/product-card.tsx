@@ -8,7 +8,6 @@ import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/componen
 import { useCart } from '@/context/cart-context';
 import { useToast } from '@/hooks/use-toast';
 import { ShoppingCart } from 'lucide-react';
-import { useLanguage } from '@/context/language-context';
 
 interface ProductCardProps {
   product: Product;
@@ -17,13 +16,12 @@ interface ProductCardProps {
 export default function ProductCard({ product }: ProductCardProps) {
   const { dispatch } = useCart();
   const { toast } = useToast();
-  const { t } = useLanguage();
 
   const handleAddToCart = () => {
     dispatch({ type: 'ADD_ITEM', payload: product });
     toast({
-      title: t('product.added_to_cart_title'),
-      description: t('product.added_to_cart_description').replace('{quantity}', '1').replace('{name}', product.name),
+      title: 'Saskira gehituta',
+      description: `1 x ${product.name} saskian sartu da.`,
     });
   };
 
@@ -54,7 +52,7 @@ export default function ProductCard({ product }: ProductCardProps) {
       <CardFooter className="p-4 pt-0">
         <Button onClick={handleAddToCart} className="w-full">
           <ShoppingCart className="mr-2 h-4 w-4" />
-          {t('product.add_to_cart')}
+          Saskira Gehitu
         </Button>
       </CardFooter>
     </Card>

@@ -1,58 +1,56 @@
 'use client';
 
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { useLanguage } from '@/context/language-context';
 
 export default function PrivacyPolicyPage() {
-  const { t } = useLanguage();
   return (
     <div className="container mx-auto max-w-4xl px-4 py-12 md:px-6">
-      <h1 className="mb-8 font-headline text-3xl font-bold md:text-4xl">{t('privacy.title')}</h1>
+      <h1 className="mb-8 font-headline text-3xl font-bold md:text-4xl">Pribatutasun Politika</h1>
       <Card>
         <CardHeader>
-          <CardTitle>{t('privacy.q1')}</CardTitle>
+          <CardTitle>Zer informazio biltzen dugu?</CardTitle>
         </CardHeader>
         <CardContent className="space-y-4 text-muted-foreground">
           <p>
-            {t('privacy.a1_1')}
+            Zuregandik informazioa biltzen dugu gure webgunean erregistratzen zarenean, eskaera bat egiten duzunean edo gure buletinean harpidetzen zarenean.
           </p>
           <p>
-            {t('privacy.a1_2')}
+            Eskaera edo erregistroa egitean, dagokion moduan, zure izena, helbide elektronikoa, posta-helbidea edo telefono-zenbakia eska dakizuke. Hala ere, gure webgunea modu anonimoan bisita dezakezu.
           </p>
         </CardContent>
       </Card>
       <Card className="mt-8">
         <CardHeader>
-          <CardTitle>{t('privacy.q2')}</CardTitle>
+          <CardTitle>Zertarako erabiltzen dugu zure informazioa?</CardTitle>
         </CardHeader>
         <CardContent className="space-y-2 text-muted-foreground">
-          <p>{t('privacy.a2_1')}</p>
+          <p>Biltzen dugun informazioa helburu hauetarako erabil daiteke:</p>
           <ul className="list-disc pl-6">
-            <li>{t('privacy.l1')}</li>
-            <li>{t('privacy.l2')}</li>
-            <li>{t('privacy.l3')}</li>
-            <li>{t('privacy.l4')}</li>
-            <li>{t('privacy.l5')}</li>
+            <li>Zure esperientzia pertsonalizatzeko</li>
+            <li>Gure webgunea hobetzeko</li>
+            <li>Bezeroarentzako zerbitzua hobetzeko</li>
+            <li>Transakzioak prozesatzeko</li>
+            <li>Aldizkako mezu elektronikoak bidaltzeko</li>
           </ul>
         </CardContent>
       </Card>
       <Card className="mt-8">
         <CardHeader>
-          <CardTitle>{t('privacy.q3')}</CardTitle>
+          <CardTitle>Nola babesten dugu zure informazioa?</CardTitle>
         </CardHeader>
         <CardContent className="space-y-4 text-muted-foreground">
           <p>
-            {t('privacy.a3')}
+            Hainbat segurtasun-neurri ezartzen ditugu zure informazio pertsonalaren segurtasuna mantentzeko eskaera bat egiten duzunean edo zure informazio pertsonala sartu, bidali edo atzitzen duzunean.
           </p>
         </CardContent>
       </Card>
        <Card className="mt-8">
         <CardHeader>
-          <CardTitle>{t('privacy.q4')}</CardTitle>
+          <CardTitle>Zure baimena</CardTitle>
         </CardHeader>
         <CardContent className="space-y-4 text-muted-foreground">
           <p>
-            {t('privacy.a4')}
+            Gure webgunea erabiliz, gure pribatutasun-politika onartzen duzu.
           </p>
         </CardContent>
       </Card>

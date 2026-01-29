@@ -7,13 +7,11 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import type { Order } from '@/lib/types';
-import { useLanguage } from '@/context/language-context';
 
 export default function AccountPage() {
   const { user, loading } = useAuth();
   const router = useRouter();
   const [orders, setOrders] = useState<Order[]>([]);
-  const { t, language } = useLanguage();
 
   useEffect(() => {
     if (!loading && !user) {
@@ -32,7 +30,7 @@ export default function AccountPage() {
   if (loading || !user) {
     return (
         <div className="container mx-auto flex min-h-[60vh] items-center justify-center px-4 py-12 md:px-6">
-            <p>{t('account.loading')}</p>
+            <p>Kargatzen...</p>
         </div>
     );
   }
@@ -43,13 +41,13 @@ export default function AccountPage() {
     return `${first}${last}`.toUpperCase();
   }
 
-  const currencyFormatter = new Intl.NumberFormat(language === 'fr' ? 'fr-FR' : 'eu-ES', { style: 'currency', currency: 'EUR' });
-  const dateFormatter = (dateString: string) => new Date(dateString).toLocaleDateString(language === 'fr' ? 'fr-FR' : 'eu-ES');
+  const currencyFormatter = new Intl.NumberFormat('eu-ES', { style: 'currency', currency: 'EUR' });
+  const dateFormatter = (dateString: string) => new Date(dateString).toLocaleDateString('eu-ES');
 
 
   return (
     <div className="container mx-auto max-w-4xl px-4 py-12 md:px-6">
-      <h1 className="mb-8 font-headline text-3xl font-bold md:text-4xl">{t('account.title')}</h1>
+      <h1 className="mb-8 font-headline text-3xl font-bold md:text-4xl">Nire Kontua</h1>
       <div className="grid gap-8 md:grid-cols-3">
         <div className="md:col-span-1">
           <Card>
@@ -66,27 +64,27 @@ export default function AccountPage() {
         <div className="md:col-span-2">
             <Card>
                 <CardHeader>
-                    <CardTitle>{t('account.profile_info')}</CardTitle>
+                    <CardTitle>Profilaren informazioa</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
                     <div className="flex">
-                        <p className="w-1/3 text-muted-foreground">{t('account.full_name')}</p>
+                        <p className="w-1/3 text-muted-foreground">Izen-abizenak</p>
                         <p>{user.firstName} {user.lastName}</p>
                     </div>
                      <div className="flex">
-                        <p className="w-1/3 text-muted-foreground">{t('account.email')}</p>
+                        <p className="w-1/3 text-muted-foreground">Helbide elektronikoa</p>
                         <p>{user.email}</p>
                     </div>
                 </CardContent>
             </Card>
             <Card className="mt-8">
                 <CardHeader>
-                    <CardTitle>{t('account.order_history')}</CardTitle>
+                    <CardTitle>Eskaeren historia</CardTitle>
                 </CardHeader>
                 <CardContent>
                     {orders.length === 0 ? (
                         <div className="text-center text-muted-foreground">
-                            <p>{t('account.no_orders')}</p>
+                            <p>Oraindik ez duzu eskaerarik egin.</p>
                         </div>
                     ) : (
                         <Accordion type="single" collapsible className="w-full">

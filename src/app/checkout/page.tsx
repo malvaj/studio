@@ -11,17 +11,15 @@ import { Separator } from '@/components/ui/separator';
 import { useAuth } from '@/context/auth-context';
 import { useEffect } from 'react';
 import type { Order } from '@/lib/types';
-import { useLanguage } from '@/context/language-context';
 
 export default function CheckoutPage() {
   const { state, dispatch } = useCart();
   const router = useRouter();
   const { toast } = useToast();
   const { user, loading } = useAuth();
-  const { t, language } = useLanguage();
 
   const subtotal = state.items.reduce((sum, item) => sum + item.price * item.quantity, 0);
-  const currencyFormatter = new Intl.NumberFormat(language === 'fr' ? 'fr-FR' : 'eu-ES', { style: 'currency', currency: 'EUR' });
+  const currencyFormatter = new Intl.NumberFormat('eu-ES', { style: 'currency', currency: 'EUR' });
   
   useEffect(() => {
     if (!loading && !user) {
@@ -37,7 +35,7 @@ export default function CheckoutPage() {
   if (loading || !user) {
      return (
         <div className="container mx-auto flex min-h-[60vh] items-center justify-center px-4 py-12 md:px-6">
-            <p>{t('checkout.loading')}</p>
+            <p>Kargatzen...</p>
         </div>
     );
   }
@@ -47,15 +45,15 @@ export default function CheckoutPage() {
     if (!user) {
         toast({
             variant: "destructive",
-            title: t('checkout.error_saving_order_title'),
-            description: t('checkout.login_required_error'),
+            title: "Errorea eskaera gordetzean",
+            description: "Saioa hasi behar duzu eskaera egiteko.",
         });
         return;
     }
     
     toast({
-        title: t('checkout.processing_payment_title'),
-        description: t('checkout.processing_payment_description'),
+        title: 'Ordainketa prozesatzen...',
+        description: 'Zure eskaera prestatzen ari gara.',
     });
 
     const newOrder: Order = {
@@ -76,8 +74,8 @@ export default function CheckoutPage() {
         console.error("Failed to save order to localStorage", error);
         toast({
             variant: "destructive",
-            title: t('checkout.error_saving_order_title'),
-            description: t('checkout.error_saving_order_description'),
+            title: "Errorea eskaera gordetzean",
+            description: "Ezin izan da zure eskaera gorde. Saiatu berriro.",
         });
         return;
     }
@@ -90,32 +88,32 @@ export default function CheckoutPage() {
 
   return (
     <div className="container mx-auto px-4 py-12 md:px-6">
-      <h1 className="mb-8 font-headline text-3xl font-bold md:text-4xl">{t('checkout.title')}</h1>
+      <h1 className="mb-8 font-headline text-3xl font-bold md:text-4xl">Ordainketa</h1>
       <form onSubmit={handleCheckout} className="grid grid-cols-1 gap-8 md:grid-cols-3">
         <div className="space-y-8 md:col-span-2">
             <Card>
                 <CardHeader>
-                    <CardTitle>{t('checkout.shipping_address')}</CardTitle>
+                    <CardTitle>Bidalketa Helbidea</CardTitle>
                 </CardHeader>
                 <CardContent className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                     <div className="space-y-2">
-                        <Label htmlFor="izena">{t('checkout.first_name')}</Label>
+                        <Label htmlFor="izena">Izena</Label>
                         <Input id="izena" placeholder="Jon" required defaultValue={user.firstName || ''} />
                     </div>
                     <div className="space-y-2">
-                        <Label htmlFor="abizenak">{t('checkout.last_name')}</Label>
+                        <Label htmlFor="abizenak">Abizenak</Label>
                         <Input id="abizenak" placeholder="Doe" required defaultValue={user.lastName || ''} />
                     </div>
                     <div className="col-span-full space-y-2">
-                        <Label htmlFor="helbidea">{t('checkout.address')}</Label>
+                        <Label htmlFor="helbidea">Helbidea</Label>
                         <Input id="helbidea" placeholder="Kale Nagusia 123" required />
                     </div>
                      <div className="space-y-2">
-                        <Label htmlFor="hiria">{t('checkout.city')}</Label>
+                        <Label htmlFor="hiria">Hiria</Label>
                         <Input id="hiria" placeholder="Bilbo" required />
                     </div>
                     <div className="space-y-2">
-                        <Label htmlFor="posta-kodea">{t('checkout.zip_code')}</Label>
+                        <Label htmlFor="posta-kodea">Posta Kodea</Label>
                         <Input id="posta-kodea" placeholder="48001" required />
                     </div>
                 </CardContent>
@@ -123,20 +121,20 @@ export default function CheckoutPage() {
 
             <Card>
                 <CardHeader>
-                    <CardTitle>{t('checkout.payment_details')}</CardTitle>
+                    <CardTitle>Ordainketa Xehetasunak</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
                     <div className="space-y-2">
-                        <Label htmlFor="card-number">{t('checkout.card_number')}</Label>
+                        <Label htmlFor="card-number">Txartel Zenbakia</Label>
                         <Input id="card-number" placeholder="**** **** **** ****" required />
                     </div>
                     <div className="grid grid-cols-3 gap-4">
                          <div className="space-y-2">
-                            <Label htmlFor="expiry-date">{t('checkout.expiry_date')}</Label>
+                            <Label htmlFor="expiry-date">Iraungitze Data</Label>
                             <Input id="expiry-date" placeholder="MM/AA" required />
                         </div>
                          <div className="space-y-2">
-                            <Label htmlFor="cvc">{t('checkout.cvc')}</Label>
+                            <Label htmlFor="cvc">CVC</Label>
                             <Input id="cvc" placeholder="123" required />
                         </div>
                     </div>
@@ -147,7 +145,7 @@ export default function CheckoutPage() {
         <div className="md:col-span-1">
             <Card>
                 <CardHeader>
-                    <CardTitle>{t('checkout.your_order')}</CardTitle>
+                    <CardTitle>Zure Eskaera</CardTitle>
                 </CardHeader>
                 <CardContent>
                     <div className="space-y-4">
@@ -155,21 +153,21 @@ export default function CheckoutPage() {
                             <div key={item.id} className="flex items-center justify-between">
                                 <div>
                                     <p className="font-medium">{item.name}</p>
-                                    <p className="text-sm text-muted-foreground">{t('checkout.quantity_short').replace('{quantity}', item.quantity.toString())}</p>
+                                    <p className="text-sm text-muted-foreground">Kop: {item.quantity}</p>
                                 </div>
                                 <p>{currencyFormatter.format(item.price * item.quantity)}</p>
                             </div>
                         ))}
                         <Separator />
                         <div className="flex justify-between font-bold text-lg">
-                            <p>{t('cart.grand_total')}</p>
+                            <p>Guztira</p>
                             <p>{currencyFormatter.format(subtotal)}</p>
                         </div>
                     </div>
                 </CardContent>
             </Card>
             <Button type="submit" className="mt-6 w-full" size="lg">
-              {t('checkout.confirm_order')}
+              Eskaera Berretsi
             </Button>
         </div>
       </form>

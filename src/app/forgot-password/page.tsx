@@ -8,14 +8,12 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Input } from '@/components/ui/input';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { useToast } from '@/hooks/use-toast';
-import { useLanguage } from '@/context/language-context';
 
 export default function ForgotPasswordPage() {
   const { toast } = useToast();
-  const { t } = useLanguage();
 
   const formSchema = z.object({
-    email: z.string().email({ message: t('login.email_invalid') }),
+    email: z.string().email({ message: 'Helbide elektroniko baliogabea.' }),
   });
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -29,8 +27,8 @@ export default function ForgotPasswordPage() {
     // Simulate sending a password reset email
     console.log(values);
     toast({
-      title: t('forgotpassword.success_title'),
-      description: t('forgotpassword.success_description'),
+      title: 'Berrezartzeko esteka bidalita',
+      description: 'Mezu elektroniko bat bidali dugu zure pasahitza berrezartzeko argibideekin.',
     });
     form.reset();
   }
@@ -39,9 +37,9 @@ export default function ForgotPasswordPage() {
     <div className="flex min-h-[80vh] items-center justify-center bg-background px-4">
       <Card className="w-full max-w-sm">
         <CardHeader>
-          <CardTitle className="text-2xl">{t('forgotpassword.title')}</CardTitle>
+          <CardTitle className="text-2xl">Pasahitza Berreskuratu</CardTitle>
           <CardDescription>
-            {t('forgotpassword.description')}
+            Sartu zure helbide elektronikoa eta pasahitza berrezartzeko esteka bat bidaliko dizugu.
           </CardDescription>
         </CardHeader>
         <Form {...form}>
@@ -52,7 +50,7 @@ export default function ForgotPasswordPage() {
                 name="email"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>{t('login.email_label')}</FormLabel>
+                    <FormLabel>Helbide elektronikoa</FormLabel>
                     <FormControl>
                       <Input type="email" placeholder="zure@email.com" {...field} />
                     </FormControl>
@@ -63,7 +61,7 @@ export default function ForgotPasswordPage() {
             </CardContent>
             <CardContent>
               <Button type="submit" className="w-full" disabled={form.formState.isSubmitting}>
-                {form.formState.isSubmitting ? t('forgotpassword.submitting_button') : t('forgotpassword.submit_button')}
+                {form.formState.isSubmitting ? 'Bidalten...' : 'Berrezartzeko esteka bidali'}
               </Button>
             </CardContent>
           </form>

@@ -16,15 +16,12 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { useRouter } from 'next/navigation';
-import { useLanguage } from '@/context/language-context';
-import LanguageSwitcher from './language-switcher';
 
 export default function Header() {
   const { state } = useCart();
   const { user, logout, loading } = useAuth();
   const router = useRouter();
   const [isClient, setIsClient] = useState(false);
-  const { t } = useLanguage();
 
   useEffect(() => {
     setIsClient(true);
@@ -48,7 +45,7 @@ export default function Header() {
       <div className="container mx-auto flex h-16 items-center justify-between px-4 md:px-6">
         <Link href="/" className="flex items-center gap-2">
           <Car className="h-6 w-6 text-primary" />
-          <span className="font-headline text-xl font-bold">{t('header.title')}</span>
+          <span className="font-headline text-xl font-bold">Rally Klasikoak</span>
         </Link>
         <nav className="flex items-center gap-2 md:gap-4">
           {!loading && (
@@ -74,21 +71,21 @@ export default function Header() {
                     </DropdownMenuLabel>
                     <DropdownMenuSeparator />
                     <DropdownMenuItem asChild>
-                      <Link href="/account">{t('header.my_account')}</Link>
+                      <Link href="/account">Nire Kontua</Link>
                     </DropdownMenuItem>
                     <DropdownMenuSeparator />
                     <DropdownMenuItem onClick={handleLogout}>
-                      {t('header.logout')}
+                      Saioa Itxi
                     </DropdownMenuItem>
                   </DropdownMenuContent>
                 </DropdownMenu>
               ) : (
                 <div className='hidden md:flex md:gap-2'>
                   <Button variant="ghost" asChild>
-                    <Link href="/login">{t('header.login')}</Link>
+                    <Link href="/login">Saioa Hasi</Link>
                   </Button>
                   <Button asChild>
-                    <Link href="/register">{t('header.register')}</Link>
+                    <Link href="/register">Erregistratu</Link>
                   </Button>
                 </div>
               )}
@@ -98,7 +95,7 @@ export default function Header() {
           <Link href="/cart" className="relative">
             <Button variant="outline" size="icon">
               <ShoppingCart className="h-5 w-5" />
-              <span className="sr-only">{t('header.cart')}</span>
+              <span className="sr-only">Erosketa saskia</span>
             </Button>
             {isClient && totalItems > 0 && (
               <span className="absolute -right-2 -top-2 flex h-6 w-6 items-center justify-center rounded-full bg-primary text-xs font-bold text-primary-foreground">
@@ -106,7 +103,6 @@ export default function Header() {
               </span>
             )}
           </Link>
-          <LanguageSwitcher />
         </nav>
       </div>
     </header>

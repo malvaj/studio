@@ -12,18 +12,16 @@ import { Input } from '@/components/ui/input';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { useAuth } from '@/context/auth-context';
 import { useToast } from '@/hooks/use-toast';
-import { useLanguage } from '@/context/language-context';
 
 export default function LoginPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const { login } = useAuth();
   const { toast } = useToast();
-  const { t } = useLanguage();
 
   const formSchema = z.object({
-    email: z.string().email({ message: t('login.email_invalid') }),
-    password: z.string().min(1, { message: t('login.password_empty') }),
+    email: z.string().email({ message: 'Helbide elektroniko baliogabea.' }),
+    password: z.string().min(1, { message: 'Pasahitza ezin da hutsik egon.' }),
   });
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -38,16 +36,16 @@ export default function LoginPage() {
     try {
       await login(values.email, values.password);
       toast({
-        title: t('login.welcome_title'),
-        description: t('login.welcome_description'),
+        title: 'Ongi etorri!',
+        description: 'Saioa ondo hasi duzu.',
       });
       const redirectUrl = searchParams.get('redirect') || '/account';
       router.push(redirectUrl);
     } catch (error) {
       toast({
         variant: 'destructive',
-        title: t('login.error_title'),
-        description: t('login.error_description'),
+        title: 'Errorea saioa hastean',
+        description: 'Helbide elektronikoa edo pasahitza ez da zuzena.',
       });
     }
   }
@@ -56,8 +54,8 @@ export default function LoginPage() {
     <div className="flex min-h-[80vh] items-center justify-center bg-background px-4">
       <Card className="w-full max-w-sm">
         <CardHeader>
-          <CardTitle className="text-2xl">{t('login.title')}</CardTitle>
-          <CardDescription>{t('login.description')}</CardDescription>
+          <CardTitle className="text-2xl">Saioa Hasi</CardTitle>
+          <CardDescription>Sartu zure helbide elektronikoa zure kontuan sartzeko.</CardDescription>
         </CardHeader>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)}>
@@ -67,7 +65,7 @@ export default function LoginPage() {
                 name="email"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>{t('login.email_label')}</FormLabel>
+                    <FormLabel>Helbide elektronikoa</FormLabel>
                     <FormControl>
                       <Input type="email" placeholder="zure@email.com" {...field} />
                     </FormControl>
@@ -81,9 +79,9 @@ export default function LoginPage() {
                 render={({ field }) => (
                   <FormItem>
                     <div className="flex items-center">
-                      <FormLabel>{t('login.password_label')}</FormLabel>
+                      <FormLabel>Pasahitza</FormLabel>
                       <Link href="/forgot-password" passHref className="ml-auto inline-block text-sm underline">
-                        {t('login.forgot_password')}
+                        Pasahitza ahaztu duzu?
                       </Link>
                     </div>
                     <FormControl>
@@ -96,12 +94,12 @@ export default function LoginPage() {
             </CardContent>
             <CardFooter className="flex-col">
               <Button type="submit" className="w-full" disabled={form.formState.isSubmitting}>
-                {form.formState.isSubmitting ? t('login.submitting_button') : t('login.submit_button')}
+                {form.formState.isSubmitting ? 'Sartzen...' : 'Saioa Hasi'}
               </Button>
               <div className="mt-4 text-center text-sm">
-                {t('login.no_account')}{' '}
+                Ez duzu konturik?{' '}
                 <Link href="/register" className="underline">
-                  {t('login.register_link')}
+                  Erregistratu
                 </Link>
               </div>
             </CardFooter>
