@@ -12,18 +12,20 @@ import { Input } from '@/components/ui/input';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { useAuth } from '@/context/auth-context';
 import { useToast } from '@/hooks/use-toast';
-
-const formSchema = z.object({
-  firstName: z.string().min(1, { message: 'Izena beharrezkoa da.' }),
-  lastName: z.string().min(1, { message: 'Abizena beharrezkoa da.' }),
-  email: z.string().email({ message: 'Helbide elektroniko baliogabea.' }),
-  password: z.string().min(6, { message: 'Pasahitzak gutxienez 6 karaktere izan behar ditu.' }),
-});
+import { useLanguage } from '@/context/language-context';
 
 export default function RegisterPage() {
   const router = useRouter();
   const { register } = useAuth();
   const { toast } = useToast();
+  const { t } = useLanguage();
+
+  const formSchema = z.object({
+    firstName: z.string().min(1, { message: t('register.first_name_required') }),
+    lastName: z.string().min(1, { message: t('register.last_name_required') }),
+    email: z.string().email({ message: t('login.email_invalid') }),
+    password: z.string().min(6, { message: t('register.password_length') }),
+  });
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -39,15 +41,15 @@ export default function RegisterPage() {
     try {
       await register(values.email, values.password, values.firstName, values.lastName);
       toast({
-        title: 'Erregistroa osatuta',
-        description: 'Zure kontua behar bezala sortu da. Saioa hasi dezakezu orain.',
+        title: t('register.success_title'),
+        description: t('register.success_description'),
       });
       router.push('/login');
     } catch (error) {
       toast({
         variant: 'destructive',
-        title: 'Errorea erregistratzean',
-        description: 'Ezin izan da kontua sortu. Baliteke emaila jada erabilita egotea.',
+        title: t('register.error_title'),
+        description: t('register.error_description'),
       });
     }
   }
@@ -56,8 +58,8 @@ export default function RegisterPage() {
     <div className="flex min-h-[80vh] items-center justify-center bg-background px-4">
       <Card className="w-full max-w-sm">
         <CardHeader>
-          <CardTitle className="text-2xl">Sortu kontu bat</CardTitle>
-          <CardDescription>Sartu zure informazioa kontu berri bat sortzeko.</CardDescription>
+          <CardTitle className="text-2xl">{t('register.title')}</CardTitle>
+          <CardDescription>{t('register.description')}</CardDescription>
         </CardHeader>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)}>
@@ -68,7 +70,7 @@ export default function RegisterPage() {
                   name="firstName"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Izena</FormLabel>
+                      <FormLabel>{t('register.first_name_label')}</FormLabel>
                       <FormControl>
                         <Input placeholder="Jon" {...field} />
                       </FormControl>
@@ -81,7 +83,7 @@ export default function RegisterPage() {
                   name="lastName"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Abizena</FormLabel>
+                      <FormLabel>{t('register.last_name_label')}</FormLabel>
                       <FormControl>
                         <Input placeholder="Doe" {...field} />
                       </FormControl>
@@ -95,7 +97,7 @@ export default function RegisterPage() {
                 name="email"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Helbide elektronikoa</FormLabel>
+                    <FormLabel>{t('login.email_label')}</FormLabel>
                     <FormControl>
                       <Input type="email" placeholder="zure@email.com" {...field} />
                     </FormControl>
@@ -108,7 +110,7 @@ export default function RegisterPage() {
                 name="password"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Pasahitza</FormLabel>
+                    <FormLabel>{t('register.password_label')}</FormLabel>
                     <FormControl>
                       <Input type="password" {...field} />
                     </FormControl>
@@ -119,12 +121,12 @@ export default function RegisterPage() {
             </CardContent>
             <CardFooter className="flex-col">
               <Button type="submit" className="w-full" disabled={form.formState.isSubmitting}>
-                {form.formState.isSubmitting ? 'Sortzen...' : 'Kontua Sortu'}
+                {form.formState.isSubmitting ? t('register.submitting_button') : t('register.submit_button')}
               </Button>
               <div className="mt-4 text-center text-sm">
-                Baduzu kontua?{' '}
+                {t('register.has_account')}{' '}
                 <Link href="/login" className="underline">
-                  Saioa Hasi
+                  {t('register.login_link')}
                 </Link>
               </div>
             </CardFooter>

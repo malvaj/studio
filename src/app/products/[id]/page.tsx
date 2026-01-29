@@ -9,6 +9,7 @@ import { useCart } from '@/context/cart-context';
 import { useToast } from '@/hooks/use-toast';
 import { Minus, Plus, ShoppingCart } from 'lucide-react';
 import { Input } from '@/components/ui/input';
+import { useLanguage } from '@/context/language-context';
 
 type ProductPageProps = {
   params: {
@@ -20,6 +21,7 @@ export default function ProductPage({ params }: ProductPageProps) {
   const [quantity, setQuantity] = useState(1);
   const { dispatch } = useCart();
   const { toast } = useToast();
+  const { t } = useLanguage();
   
   const product = products.find((p) => p.id === parseInt(params.id, 10));
 
@@ -32,8 +34,10 @@ export default function ProductPage({ params }: ProductPageProps) {
         dispatch({ type: 'ADD_ITEM', payload: product });
     }
     toast({
-      title: 'Saskira gehituta',
-      description: `${quantity} x ${product.name} saskian sartu da.`,
+      title: t('product.added_to_cart_title'),
+      description: t('product.added_to_cart_description')
+        .replace('{quantity}', quantity.toString())
+        .replace('{name}', product.name),
     });
   };
 
@@ -74,7 +78,7 @@ export default function ProductPage({ params }: ProductPageProps) {
             </div>
             <Button onClick={handleAddToCart} size="lg" className="flex-grow">
               <ShoppingCart className="mr-2 h-5 w-5" />
-              Saskira Gehitu
+              {t('product.add_to_cart')}
             </Button>
           </div>
         </div>
