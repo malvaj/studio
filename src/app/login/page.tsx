@@ -1,5 +1,6 @@
 'use client';
 
+import { Suspense } from 'react'; // <--- Importamos Suspense
 import Link from 'next/link';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -13,7 +14,8 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '
 import { useAuth } from '@/context/auth-context';
 import { useToast } from '@/hooks/use-toast';
 
-export default function LoginPage() {
+// 1. Movemos la lógica a un componente interno
+function LoginFormContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const { login } = useAuth();
@@ -107,5 +109,14 @@ export default function LoginPage() {
         </Form>
       </Card>
     </div>
+  );
+}
+
+// 2. El componente principal envuelve el contenido en Suspense
+export default function LoginPage() {
+  return (
+    <Suspense fallback={<div className="flex min-h-[80vh] items-center justify-center">Kargatzen...</div>}>
+      <LoginFormContent />
+    </Suspense>
   );
 }
